@@ -6,6 +6,11 @@ import at.itkolleg.studentenverwaltung.repositories.DbZugriffStudenten;
 
 import java.util.List;
 
+/*
+ * Normalerweise würde man an dieser Stelle auch Geschäftslogik verbaut -
+ * da wir aber nur mit CRUD-Methoden arbeiten, fällt dies weg.
+ */
+
 public class StudentenServiceImpl implements StudentenService {
 
     private DbZugriffStudenten dbZugriffStudenten;

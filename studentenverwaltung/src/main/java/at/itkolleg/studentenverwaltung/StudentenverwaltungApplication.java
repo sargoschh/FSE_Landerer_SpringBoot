@@ -1,6 +1,7 @@
 package at.itkolleg.studentenverwaltung;
 
 import at.itkolleg.studentenverwaltung.domain.Student;
+import at.itkolleg.studentenverwaltung.repositories.DbZugriffStudenten;
 import at.itkolleg.studentenverwaltung.repositories.StudentJPARepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -20,9 +21,17 @@ public class StudentenverwaltungApplication implements ApplicationRunner {
 	 * In diesem Fall wird wahrscheinlich das SimpleJpaRepository verwendet.
 	 * Es kann nun also ganz einfach auf die Datenbank zugegriffen werden, ohne selbst die DB-Verbindung
 	 * erstellen zu müssen - new StudentJPARepo ist nicht mehr notwendig.
+	 *
+	 * @Autowired
+	 * StudentJPARepository studentJPARepository;
+	 */
+
+	/*
+	 * Nun wird das ganze entkoppelt...die Application ist nun also nicht mehr direkt von der Datenbanktechnologie
+	 * abhängig, sondern greift über das DataLayer darauf zu.
 	 */
 	@Autowired
-	StudentJPARepo studentJPARepo;
+	DbZugriffStudenten dbZugriffStudenten;
 
 	public static void main(String[] args) {
 		SpringApplication.run(StudentenverwaltungApplication.class, args);
@@ -30,8 +39,8 @@ public class StudentenverwaltungApplication implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		this.studentJPARepo.save(new Student("Sarah Gosch", "6493"));
-		this.studentJPARepo.save(new Student("Romana Gosch", "6491"));
-		this.studentJPARepo.save(new Student("Marcel Schranz", "6471"));
+		this.dbZugriffStudenten.studentSpeichern(new Student("Sarah Gosch", "6493"));
+		this.dbZugriffStudenten.studentSpeichern(new Student("Romana Gosch", "6491"));
+		this.dbZugriffStudenten.studentSpeichern(new Student("Marcel Schranz", "6471"));
 	}
 }

@@ -3,6 +3,7 @@ package at.itkolleg.studentenverwaltung.services;
 import at.itkolleg.studentenverwaltung.domain.Student;
 import at.itkolleg.studentenverwaltung.exceptions.StudentNichtGefundenException;
 import at.itkolleg.studentenverwaltung.repositories.DbZugriffStudenten;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,6 +12,10 @@ import java.util.List;
  * da wir aber nur mit CRUD-Methoden arbeiten, fällt dies weg.
  */
 
+/*
+ * Dadurch kann SpringBoot den Service bei Bedarf injizieren.
+ */
+@Service
 public class StudentenServiceImpl implements StudentenService {
 
     private DbZugriffStudenten dbZugriffStudenten;
@@ -31,7 +36,7 @@ public class StudentenServiceImpl implements StudentenService {
 
     @Override
     public Student studentMitId(Long id) throws StudentNichtGefundenException {
-        return this.studentMitId(id);
+        return this.dbZugriffStudenten.studentMitId(id);
     }
 
     @Override

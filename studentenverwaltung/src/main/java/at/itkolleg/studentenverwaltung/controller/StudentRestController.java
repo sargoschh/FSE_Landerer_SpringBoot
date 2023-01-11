@@ -2,8 +2,13 @@ package at.itkolleg.studentenverwaltung.controller;
 
 import at.itkolleg.studentenverwaltung.domain.Student;
 import at.itkolleg.studentenverwaltung.exceptions.StudentNichtGefundenException;
+import at.itkolleg.studentenverwaltung.exceptions.StudentValidierungFehlgeschlagenException;
 import at.itkolleg.studentenverwaltung.services.StudentenService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,9 +37,25 @@ public class StudentRestController {
         return ResponseEntity.ok(this.studentenService.gibAlleStudenten());
     }
 
+    /*
+     * @Valid - so wird sozusagen die Validierungsfunktion angeschmissen
+     * BindingResult - wenn die Validierung beim Erstellen eines Studenten ein Problem hat, dann werden diese
+     * Probleme im BindingResult gespeichert und dem User mitgegeben.
+     */
     @PostMapping
-    public ResponseEntity<Student> studentEinfuegen(@RequestBody Student student) {
-        return ResponseEntity.ok(this.studentenService.studentEinfuegen(student));
+    public ResponseEntity<Student> studentEinfuegen(@Valid @RequestBody Student student, BindingResult bindingResult)
+            throws StudentValidierungFehlgeschlagenException {
+        String errors = "";
+        if(bindingResult.hasErrors()) {
+            for(ObjectError error : bindingResult.getAllErrors()) {
+                errors += "Validierungsfehler für Objekt " + error.getObjectName() +
+                        " im Feld " + ((FieldError)error).getField() + " mit folgendem Problem: " +
+                        error.getDefaultMessage();
+            }
+            throw new StudentValidierungFehlgeschlagenException(errors);
+        } else {
+            return ResponseEntity.ok(this.studentenService.studentEinfuegen(student));
+        }
     }
 
     @DeleteMapping("/{id}")

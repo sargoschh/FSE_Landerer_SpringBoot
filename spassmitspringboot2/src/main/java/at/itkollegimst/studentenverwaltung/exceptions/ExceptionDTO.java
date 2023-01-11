@@ -1,5 +1,6 @@
-package at.itkolleg.studentenverwaltung.exceptions;
+package at.itkollegimst.studentenverwaltung.exceptions;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,4 +12,5 @@ public class ExceptionDTO {
 
     private String code;
     private String message;
+
 }

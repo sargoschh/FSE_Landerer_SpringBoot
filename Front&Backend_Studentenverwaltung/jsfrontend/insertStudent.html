@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student:in hinzufügen</title>
+    <script src="jquery-3.6.3.min.js"></script>
+    <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+
+        <h1>Student:in hinzufügen</h1>
+        <hr class="border-2 border-top border-info">
+        <a href="allstudents.html" class="btn btn-info" role="button">Student:innenliste</a>
+        <hr class="border-2 border-top border-info">
+        
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">NAME</label>
+                <input type="text" class="form-control" id="name" name="name">
+                <div class="form-text" id="nameError"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="plz" class="form-label">PLZ</label>
+                <input type="text" class="form-control" id="plz" name="plz">
+                <div class="form-text" id="plzError"></div>
+            </div>
+
+            <button class="btn btn-warning" onclick="sendData()">hinzufügen</button>
+        </form>
+    </div>
+</body>
+</html>

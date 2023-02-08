@@ -1,9 +1,6 @@
 package at.itkolleg.growmanager.controller;
 
-import at.itkolleg.growmanager.exceptions.ExceptionsDTO;
-import at.itkolleg.growmanager.exceptions.FormValidationExceptionDTO;
-import at.itkolleg.growmanager.exceptions.PlantTypeNotFound;
-import at.itkolleg.growmanager.exceptions.PlantTypeValidationFailed;
+import at.itkolleg.growmanager.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,5 +14,10 @@ public class ExceptionController {
     @ExceptionHandler(PlantTypeValidationFailed.class)
     public ResponseEntity<FormValidationExceptionDTO> plantTypeValidationFailed(PlantTypeValidationFailed plantTypeValidationFailed) {
         return new ResponseEntity<>(plantTypeValidationFailed.getErrorMap(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PlantTypeNotFound.class)
+    public ResponseEntity<ExceptionsDTO> duplicatedPlantTypeExceptionResponseEntity(DuplicatedPlantTypeException duplicatedPlantTypeException) {
+        return new ResponseEntity<>(new ExceptionsDTO("1500", duplicatedPlantTypeException.getMessage()), HttpStatus.CONFLICT);
     }
 }

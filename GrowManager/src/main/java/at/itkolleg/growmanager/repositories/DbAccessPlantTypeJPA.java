@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class DbZugriffPlantTypeJPA implements DbZugriffPlantType {
+public class DbAccessPlantTypeJPA implements DbAccessPlantType {
 
     private PlantTypeJPARepo plantTypeJPARepo;
 
-    public DbZugriffPlantTypeJPA(PlantTypeJPARepo plantTypeJPARepo) {
+    public DbAccessPlantTypeJPA(PlantTypeJPARepo plantTypeJPARepo) {
         this.plantTypeJPARepo = plantTypeJPARepo;
     }
 
@@ -32,7 +32,7 @@ public class DbZugriffPlantTypeJPA implements DbZugriffPlantType {
     }
 
     @Override
-    public PlantType allPlantTypesWithId(Long id) throws PlantTypeNotFound {
+    public PlantType plantTypesWithId(Long id) throws PlantTypeNotFound {
         Optional<PlantType> optPlantType = this.plantTypeJPARepo.findById(id);
         if(optPlantType.isPresent()) {
             return optPlantType.get();

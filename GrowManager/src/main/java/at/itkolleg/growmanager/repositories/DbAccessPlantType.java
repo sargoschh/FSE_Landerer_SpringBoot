@@ -5,11 +5,11 @@ import at.itkolleg.growmanager.exceptions.PlantTypeNotFound;
 
 import java.util.List;
 
-public interface DbZugriffPlantType {
+public interface DbAccessPlantType {
 
     PlantType savePlantType(PlantType plantType);
     List<PlantType> allPlantTypes();
     List<PlantType> allPlantTypesWithName(String name);
-    PlantType allPlantTypesWithId(Long id) throws PlantTypeNotFound;
+    PlantType plantTypesWithId(Long id) throws PlantTypeNotFound;
     PlantType deletePlantTypeWithId(Long id);
 }

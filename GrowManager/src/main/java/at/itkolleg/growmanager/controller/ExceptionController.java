@@ -15,7 +15,7 @@ public class ExceptionController {
     public ResponseEntity<FormValidationExceptionDTO> plantTypeValidationFailed(PlantTypeValidationFailed plantTypeValidationFailed) {
         return new ResponseEntity<>(plantTypeValidationFailed.getErrorMap(), HttpStatus.BAD_REQUEST);
     }
-
+//https://stackoverflow.com/questions/63352008/better-way-to-add-custom-error-message-during-unique-constrains-jpa-hibernate
     @ExceptionHandler(PlantTypeNotFound.class)
     public ResponseEntity<ExceptionsDTO> duplicatedPlantTypeExceptionResponseEntity(DuplicatedPlantTypeException duplicatedPlantTypeException) {
         return new ResponseEntity<>(new ExceptionsDTO("1500", duplicatedPlantTypeException.getMessage()), HttpStatus.CONFLICT);
